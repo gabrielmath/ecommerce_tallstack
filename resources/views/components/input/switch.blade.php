@@ -1,11 +1,11 @@
 <div
+  class="flex items-center justify-between w-full"
   x-data="{
     active: false
   }"
-  class="flex items-center justify-between w-full"
   @click="active = !active"
 >
-  {{ $slot }} <span x-text="active ? 'on' : 'off'"></span>
+  {{ $slot }}
 
   <div
     class="relative w-11 h-6 border-2 rounded-full cursor-pointer"

@@ -63,7 +63,42 @@
     </div>
 
     <div class="w-1/3">
-      sda[-okfa-podfjki0wjdf0iwjf0ijwef0ijw0ifjhw0ifw0hf0whfiwhf9urwhgúwrh
+      <div class="sticky top-4 bg-white rounded-lg overflow-hidden ">
+        <div class="pt-8 px-8 pb-4">
+          <h3 class="text-gray-900 text-xl text-center">Checkout Summary</h3>
+
+          <div class="mt-4 flex items-center justify-between text-gray-700">
+            <span>2 products</span>
+            <span>$ 1,280.00</span>
+          </div>
+
+          <div class="flex items-center justify-between text-gray-700">
+            <span>Shipping</span>
+            <span>$ 45.00</span>
+          </div>
+
+          <div class="flex items-center justify-between text-gray-400">
+            <span>Discount</span>
+            <span>$ 0.00</span>
+          </div>
+
+          <div class=" flex items-center space-x-2.5 text-gray-700">
+            <x-jet-input type="text" class="w-3/6 py-1 px-1.5" placeholder="Coupon"/>
+            <x-jet-button class="py-1 px-1.5">
+              <x-icon.plus class="h-5 w-5 text-white"/>
+            </x-jet-button>
+          </div>
+
+          <div class="mt-2 flex items-center justify-between text-xl font-bold text-gray-900">
+            <span>Total</span>
+            <span>$ 1,325.00</span>
+          </div>
+        </div>
+        <button class="bg-gray-200 py-4 text-gray-400 w-full space-x-3 flex items-center justify-center">
+          <x-icon.lock-closed class="w-4 h-4 text-green-300"/>
+          <span>Confirm Payment</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
