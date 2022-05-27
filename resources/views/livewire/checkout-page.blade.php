@@ -1,3 +1,10 @@
+@push('scripts')
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('{{ env('STRIPE_KEY') }}');
+  </script>
+@endpush
+
 <div>
   <h1 class="text-3xl text-gray-700 uppercase font-bold text-center mt-20 mb-10">Checkout</h1>
 
@@ -94,7 +101,24 @@
             <span>$ 1,325.00</span>
           </div>
         </div>
-        <button class="bg-gray-200 py-4 text-gray-400 w-full space-x-3 flex items-center justify-center">
+        <button
+          x-data="{
+            async confirmPayment() {
+              try {
+                const stripeSession = await @this.confirmPayment();
+                const {error} = stripe.redirectToCheckout({sessionId: stripeSession.id});
+
+                if (error) {
+                  alert(error.message);
+                }
+              } catch (error) {
+                 console.error('ERROR', error);
+              }
+            }
+          }"
+          class="bg-gray-200 py-4 text-gray-400 w-full space-x-3 flex items-center justify-center"
+          @click="confirmPayment"
+        >
           <x-icon.lock-closed class="w-4 h-4 text-green-300"/>
           <span>Confirm Payment</span>
         </button>

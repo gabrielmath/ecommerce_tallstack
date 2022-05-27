@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "laravel/cashier": "^13.11",
         "laravel/framework": "^9.2",
         "laravel/jetstream": "^2.7",
         "laravel/sanctum": "^2.14.1",
@@ -17,6 +18,7 @@
         "livewire/livewire": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "laravel/telescope": "^4.8",
@@ -55,7 +57,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "laravel/telescope"
+                "laravel/telescope",
+                "barryvdh/laravel-ide-helper"
             ]
         }
     },
