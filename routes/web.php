@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Stripe\WebhookController;
+use App\Http\Livewire\Admin\ProductList;
 use App\Http\Livewire\CheckoutPage;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('checkout', CheckoutPage::class)->name('checkout');
+Route::get('/checkout', CheckoutPage::class)->name('checkout');
+Route::get('/products', ProductList::class);
 
 Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
