@@ -9,3 +9,12 @@
     <div class="font-bold text-gray-400">Published</div>
   </div>
 </div>
+
+<div class="grid grid-cols-3 gap-5 mt-6">
+  <x-product.card/>
+  <x-product.card/>
+  <x-product.card/>
+  <x-product.card/>
+  <x-product.card/>
+</div>
+
