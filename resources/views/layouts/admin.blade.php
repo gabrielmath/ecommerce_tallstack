@@ -22,11 +22,9 @@
 </head>
 <body class="font-sans antialiased">
 
-<div class="min-h-screen bg-gray-100">
-  {{--  @livewire('navigation-menu')--}}
-
+<div class="min-h-screen bg-slate-200">
   <!-- Page Heading -->
-  <x-admin.nav-bar></x-admin.nav-bar>
+  <x-admin.nav-bar/>
 
   <!-- Page Content -->
   <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

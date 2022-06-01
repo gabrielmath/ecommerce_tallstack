@@ -1,4 +1,4 @@
-<nav class="h-20 border flex justify-center space-x-4">
+<nav class="h-20 border flex justify-center space-x-4 bg-white">
   <x-admin.nav-item icon="home" :is-active="true">Home</x-admin.nav-item>
   <x-admin.nav-item icon="orders">Orders</x-admin.nav-item>
   <x-admin.nav-item icon="tags">Products</x-admin.nav-item>
