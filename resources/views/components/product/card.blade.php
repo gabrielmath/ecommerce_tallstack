@@ -1,7 +1,7 @@
 <div class="rounded-2xl space-y-4 bg-white shadow-md p-5">
   <div class="flex justify-between">
-    <h3 class="font-bold text-gray-700">Apple Watch</h3>
-    <span class="text-gray-400">$ 45</span>
+    <h3 class="font-bold text-gray-700">{{ $product->name }}</h3>
+    <span class="text-gray-400 whitespace-nowrap">$ {{ $product->price / 100 }}</span>
   </div>
   <img
     class="rounded-lg"
@@ -9,9 +9,6 @@
     alt=""
   />
   <p class="text-sm text-gray-500">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-    molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-    numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-    optio, eaque rerum! Provident similique accusantium nemo autem.
+    {{ $product->description }}
   </p>
 </div>

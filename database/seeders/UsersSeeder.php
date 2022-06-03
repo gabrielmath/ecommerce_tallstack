@@ -18,7 +18,8 @@ class UsersSeeder extends Seeder
         $user = User::factory()->create([
             'name'     => 'Gabriel',
             'email'    => 'admin@user.com',
-            'password' => \Hash::make('12345678')
+            'password' => \Hash::make('12345678'),
+            'admin'    => true
         ]);
 
         $team = Team::factory()->hasAttached($user, ['role' => 'admin'])->create([

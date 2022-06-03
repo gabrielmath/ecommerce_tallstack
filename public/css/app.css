@@ -1108,9 +1108,6 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
-.mt-12 {
-  margin-top: 3rem;
-}
 .block {
   display: block;
 }
@@ -1301,9 +1298,6 @@ select {
 .list-disc {
   list-style-type: disc;
 }
-.grid-flow-col {
-  grid-auto-flow: column;
-}
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
@@ -1419,6 +1413,9 @@ select {
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.whitespace-nowrap {
   white-space: nowrap;
 }
 .rounded-md {
