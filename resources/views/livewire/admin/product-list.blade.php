@@ -8,12 +8,18 @@
       class="max-w-xs ml-7"
     />
 
-    {{ $search }}
-
     <div class="ml-auto flex items-center space-x-6">
-      <div class="font-bold text-gray-700 border-b-2 border-current">All</div>
-      <div class="font-bold text-gray-400">Draft</div>
-      <div class="font-bold text-gray-400">Published</div>
+      <x-filter-item wire:click="$set('filter', null)" :is-active="!$filter">
+        All
+      </x-filter-item>
+
+      <x-filter-item wire:click="$set('filter','draft')" :is-active="$filter === 'draft'">
+        Draft
+      </x-filter-item>
+
+      <x-filter-item wire:click="$set('filter','published')" :is-active="$filter === 'published'">
+        Published
+      </x-filter-item>
     </div>
   </div>
 

@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('name');
             $table->string('description')->nullable();
             $table->unsignedBigInteger('price')->nullable();
-            $table->string('status')->nullable();
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

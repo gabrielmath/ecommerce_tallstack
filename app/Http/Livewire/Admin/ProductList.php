@@ -9,6 +9,7 @@ use Livewire\Component;
 class ProductList extends Component
 {
     public $search;
+    public $filter;
 
     public function render()
     {
@@ -18,15 +19,24 @@ class ProductList extends Component
     public function getProductsProperty()
     {
         return Product::query()
-            ->when($this->search, function (Builder $product) {
-//                $product->whereRaw('LOWER(name) LIKE ?', '%' . mb_strtolower($this->search) . '%');
+            ->when($this->search, function (Builder $query) {
+//                $query->whereRaw('LOWER(name) LIKE ?', '%' . mb_strtolower($this->search) . '%');
 
                 $formattedNumber = is_numeric($this->search)
                     ? \Str::of($this->search)->replace(',', '')->replace('.', '')
                     : $this->search;
 
-                $product->where('name', 'LIKE', "%{$this->search}%")
-                    ->orWhere('price', 'LIKE', "%{$formattedNumber}%");
+                $query->where(
+                    fn(Builder $product) => $product
+                        ->where('name', 'LIKE', "%{$this->search}%")
+                        ->orWhere('price', 'LIKE', "%{$formattedNumber}%")
+                        ->orWhere('description', 'LIKE', "%{$this->search}%")
+                );
+            })
+            ->when($this->filter, function (Builder $query) {
+                $this->filter === 'draft'
+                    ? $query->whereNull('published_at')
+                    : $query->whereNotNull('published_at');
             })
             ->paginate(9);
     }

@@ -62,8 +62,45 @@ it('should search products by price', function () {
         fn($product) => $component->assertDontSee($productList->random()->price)
     );
 });
-it('should search products by description');
-it('can be filtered by draft');
-it('can be filtered by published');
-it('should paginate by url');
-it('should sync query string');
+
+it('should search products by description', function () {
+    $productList = Product::factory(3)->create();
+
+    /** @var Product $product */
+    $product = Product::factory()->create();
+
+    $component = livewire(ProductList::class)
+        ->set('search', $product->description)
+        ->assertSee($product->description)
+        ->assertDontSee($productList->random()->description);
+
+    $productList->each(
+        fn($product) => $component->assertDontSee($productList->random()->description)
+    );
+});
+
+it('can be filtered by draft', function () {
+    $productList = Product::factory(3)->create(['published_at' => now()]);
+
+    /** @var Product $draftProduct */
+    $draftProduct = Product::factory()->create(['published_at' => null]);
+
+    $component = livewire(ProductList::class)
+        ->set('filter', 'draft')
+        ->assertSee($draftProduct->name);
+
+    $productList->each(fn($product) => $component->assertDontSee($product->name));
+});
+
+it('can be filtered by published', function () {
+    $productList = Product::factory(3)->create(['published_at' => null]);
+
+    /** @var Product $publishedProduct */
+    $publishedProduct = Product::factory()->create(['published_at' => now()]);
+
+    $component = livewire(ProductList::class)
+        ->set('filter', 'published')
+        ->assertSee($publishedProduct->name);
+
+    $productList->each(fn($product) => $component->assertDontSee($product->name));
+});
