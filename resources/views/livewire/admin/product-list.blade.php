@@ -25,7 +25,7 @@
         />
       </div>
     </div>
-    <x-jet-button>New Product</x-jet-button>
+    <x-button>New Product</x-button>
   </div>
 
   <div class="grid grid-cols-3 gap-5 mt-6">

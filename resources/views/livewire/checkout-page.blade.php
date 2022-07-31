@@ -11,18 +11,18 @@
   <div class="flex space-x-14">
     <div class="w-2/3 space-y-8">
       <x-card title="Contact" icon="user-circle">
-        <x-jet-input type="text" placeholder="Name"/>
-        <x-jet-input type="email" placeholder="Email"/>
+        <x-input type="text" placeholder="Name"/>
+        <x-input type="email" placeholder="Email"/>
 
         <div class="flex space-x-4">
-          <x-jet-input type="tel" class="w-1/4" placeholder="Zip code"/>
-          <x-jet-input type="text" class="w-2/4" placeholder="Address line 1"/>
-          <x-jet-input type="text" class="w-1/4" placeholder="Address line 2"/>
+          <x-input type="tel" class="w-1/4" placeholder="Zip code"/>
+          <x-input type="text" class="w-2/4" placeholder="Address line 1"/>
+          <x-input type="text" class="w-1/4" placeholder="Address line 2"/>
         </div>
 
         <div class="flex space-x-4">
-          <x-jet-input type="text" placeholder="City"/>
-          <x-jet-input type="text" placeholder="State"/>
+          <x-input type="text" placeholder="City"/>
+          <x-input type="text" placeholder="State"/>
         </div>
 
         <div class="flex items-center justify-between text-gray-400">
@@ -36,17 +36,17 @@
       </x-card>
 
       <x-card title="Shipping" icon="truck">
-        <x-jet-input type="text" placeholder="Name"/>
+        <x-input type="text" placeholder="Name"/>
 
         <div class="flex space-x-4">
-          <x-jet-input type="tel" class="w-1/4" placeholder="Zip code"/>
-          <x-jet-input type="text" class="w-2/4" placeholder="Address line 1"/>
-          <x-jet-input type="text" class="w-1/4" placeholder="Address line 2"/>
+          <x-input type="tel" class="w-1/4" placeholder="Zip code"/>
+          <x-input type="text" class="w-2/4" placeholder="Address line 1"/>
+          <x-input type="text" class="w-1/4" placeholder="Address line 2"/>
         </div>
 
         <div class="flex space-x-4">
-          <x-jet-input type="text" placeholder="City"/>
-          <x-jet-input type="text" placeholder="State"/>
+          <x-input type="text" placeholder="City"/>
+          <x-input type="text" placeholder="State"/>
         </div>
 
         <div class="flex items-center justify-between text-gray-400">
@@ -55,12 +55,12 @@
       </x-card>
 
       <x-card title="Payment" icon="currency-dollar">
-        <x-jet-input type="text" placeholder="Cardholder Name"/>
+        <x-input type="text" placeholder="Cardholder Name"/>
 
         <div class="flex space-x-4">
-          <x-jet-input type="tel" class="w-3/5" placeholder="Card Number"/>
-          <x-jet-input type="tel" class="w-1/5" placeholder="MM/YY"/>
-          <x-jet-input type="tel" class="w-1/5" placeholder="CVV"/>
+          <x-input type="tel" class="w-3/5" placeholder="Card Number"/>
+          <x-input type="tel" class="w-1/5" placeholder="MM/YY"/>
+          <x-input type="tel" class="w-1/5" placeholder="CVV"/>
         </div>
 
         <div class="flex items-center justify-between text-gray-400">
@@ -90,10 +90,10 @@
           </div>
 
           <div class=" flex items-center space-x-2.5 text-gray-700">
-            <x-jet-input type="text" class="w-3/6 py-1 px-1.5" placeholder="Coupon"/>
-            <x-jet-button class="py-1 px-1.5">
+            <x-input type="text" class="w-3/6 py-1 px-1.5" placeholder="Coupon"/>
+            <x-button class="py-1 px-1.5">
               <x-icon.plus class="h-5 w-5 text-white"/>
-            </x-jet-button>
+            </x-button>
           </div>
 
           <div class="mt-2 flex items-center justify-between text-xl font-bold text-gray-900">
