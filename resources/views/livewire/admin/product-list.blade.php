@@ -1,7 +1,9 @@
 <div>
   <div class="flex items-center justify-between">
     <div>
-      <h1 class="font-bold text-3xl text-gray-700">Products ({{ $this->products->total() }})</h1>
+      <x-page-title>
+        Products ({{ $this->products->total() }})
+      </x-page-title>
 
       <div class=" flex items-center space-x-4">
         <div class="ml-auto flex items-center space-x-6">
@@ -25,7 +27,7 @@
         />
       </div>
     </div>
-    <x-button>New Product</x-button>
+    <x-button.link :href="route('admin.products.create')">New Product</x-button.link>
   </div>
 
   <div class="grid grid-cols-3 gap-5 mt-6">

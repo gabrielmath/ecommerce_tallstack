@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Stripe\WebhookController;
-use App\Http\Livewire\Admin\ProductList;
+use App\Http\Livewire\Admin\{ProductForm, ProductList};
 use App\Http\Livewire\CheckoutPage;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +32,7 @@ Route::middleware([
 
 Route::middleware(['auth:sanctum', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/products', ProductList::class)->name('products');
+    Route::get('/products/create', ProductForm::class)->name('products.create');
 });
 
 Route::get('/checkout', CheckoutPage::class)->name('checkout');
