@@ -5,11 +5,19 @@ namespace App\Http\Livewire\Admin;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProductList extends Component
 {
+    use WithPagination;
+
     public $search;
     public $filter;
+
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'filter' => ['except' => '']
+    ];
 
     public function render()
     {

@@ -5,6 +5,7 @@
     <x-input.search
       placeholder="Search..."
       wire:model.debounce.500ms="search"
+      :is-active="!!$search"
       class="max-w-xs ml-7"
     />
 
@@ -28,5 +29,9 @@
       <x-product.card :product="$product"/>
     @empty
     @endforelse
+  </div>
+
+  <div class="my-10">
+    {{ $this->products->links() }}
   </div>
 </div>
