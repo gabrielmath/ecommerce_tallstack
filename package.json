@@ -21,6 +21,8 @@
         "tailwindcss": "^3.0.0"
     },
     "dependencies": {
-        "@tailwindcss/line-clamp": "^0.4.0"
+        "@tailwindcss/line-clamp": "^0.4.0",
+        "currency.js": "^2.0.4",
+        "simple-mask-money": "^3.0.1"
     }
 }
