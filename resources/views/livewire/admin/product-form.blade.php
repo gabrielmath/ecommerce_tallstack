@@ -47,12 +47,46 @@
       </div>
     </div>
 
-    <div class="w-2/3">
+    <form wire:submit.prevent="save" class="w-2/3">
       <div class="space-y-3">
-        <x-input class="w-full" type="text" placeholder="Product Name"/>
-        <x-input class="w-full" type="text" placeholder="Description"/>
-        <x-input class="w-full" type="text" placeholder="Categories"/>
-        <x-input class="w-full" type="number" placeholder="Price"/>
+        <div class="">
+          <x-input
+            wire:model.defer="product.name"
+            class="w-full"
+            type="text"
+            placeholder="Product Name"
+          />
+          <x-input-error for="product.name"/>
+        </div>
+
+        <div class="">
+          <x-input
+            wire:model.defer="product.description"
+            class="w-full"
+            type="text"
+            placeholder="Description"
+          />
+          <x-input-error for="product.description"/>
+        </div>
+
+        <div class="">
+          <x-input
+            class="w-full"
+            type="text"
+            placeholder="Categories"
+          />
+        </div>
+
+        <div class="">
+          <x-input.price
+            wire:model="product.price"
+            class="w-full"
+            type="text"
+            placeholder="$ Price"
+          />
+          <x-input-error for="product.price"/>
+        </div>
+        
       </div>
 
       {{-- Variations --}}
@@ -155,7 +189,7 @@
         <x-button class="w-full flex items-center justify-center">Save</x-button>
       </div>
 
-    </div>
+    </form>
   </div>
 
 </div>
