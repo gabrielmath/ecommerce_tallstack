@@ -3,45 +3,42 @@
 
   <div class="flex space-x-3 mt-5">
     <div class="w-1/3">
-      <div class="">
-        <img
-          class="rounded-lg"
-          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1399&q=80"
-          alt=""
-        />
-      </div>
-
       <div class="grid grid-cols-4 gap-2 mt-2">
-        <div class="flex max-h-16">
-          <img
-            class="rounded-lg object-cover"
-            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1399&q=80"
-            alt=""
-          />
-        </div>
-
-        <div class="flex max-h-16">
-          <img
-            class="rounded-lg object-cover"
-            src="https://images.unsplash.com/photo-1659204675703-50a26dccfd90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80"
-            alt=""
-          />
-        </div>
-
-        <div class="flex max-h-16">
-          <img
-            class="rounded-lg object-cover"
-            src="https://images.unsplash.com/photo-1659204675703-50a26dccfd90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80"
-            alt=""
-          />
-        </div>
-
-        <div class="flex max-h-16">
+        @foreach($temporaryImages as $temporaryImage)
           <div
-            class="w-full flex items-center justify-center bg-white rounded-lg text-gray-500 opacity-50 hover:opacity-100 cursor-pointer transition duration-100"
+            wire:key="{{ $temporaryImage->temporaryUrl() }}"
+            class="relative group {{ $loop->first ? 'col-span-4' : 'flex max-h-16' }}"
+          >
+            <img
+              class="rounded-lg object-cover"
+              src="{{ $temporaryImage->temporaryUrl() }}"
+              alt=""
+            />
+            <div
+              wire:click="removeTemporaryImage({{ $loop->index }})"
+              class="absolute opacity-0 group-hover:opacity-100 h-5 w-5 flex items-center justify-center top-0.5 right-0.5 bg-black bg-opacity-50 rounded-full cursor-pointer hover:bg-red-500 transition-all duration-200"
+            >
+              <x-icon.x class="w-4 h-4 text-white"/>
+            </div>
+          </div>
+        @endforeach
+
+
+        <div class="flex max-h-16" x-data>
+          <input
+            wire:model="temporaryImages"
+            type="file"
+            multiple
+            x-ref="inputFile"
+            accept="image/*"
+            class="hidden"
+          />
+          <button
+            @click="$refs.inputFile.click()"
+            class="w-full focus:outline-none flex items-center justify-center bg-white rounded-lg text-gray-500 opacity-50 hover:opacity-100 cursor-pointer transition duration-100"
           >
             <x-icon.plus class="w-12 h-12"/>
-          </div>
+          </button>
         </div>
 
       </div>
@@ -86,7 +83,7 @@
           />
           <x-input-error for="product.price"/>
         </div>
-        
+
       </div>
 
       {{-- Variations --}}
@@ -95,43 +92,33 @@
         <h4 class="text-gray-700">Price</h4>
         <h4 class="text-gray-700">Quantity</h4>
       </div>
+
       <div class="rounded-lg overflow-hidden mt-3">
         {{-- Row --}}
-        <div class="grid grid-cols-4 bg-white">
-          <div class="col-span-2 space-x-5 flex items-center p-2">
-            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-              <x-icon.camera class="w-6 h-6 text-gray-400"/>
-            </div>
-            <input
-              type="text"
-              class="bg-transparent outline-none focus:outline-none p-0 border-0 focus:ring-0"
-              placeholder="Name"
+        <div
+          x-data
+          x-init="Sortablejs.create($el, {
+            animation:150,
+            handle: '.cursor-move',
+            onSort({to}) {
+              const variationIds = Array.from(to.children).map(el => el.getAttribute('variation-id'));
+              @this.updateVariationsPositions(variationIds);
+            }
+          })"
+        >
+          @foreach($variations as $variation)
+            <livewire:products.variation-form
+              :variation="$variation"
+              variation-id="{{ $variation['id'] }}"
+              key="variation-form-{{ $variation['id'] }}"
             />
-          </div>
-
-          <div class="flex items-center pr-6">
-            <input
-              type="text"
-              class="bg-transparent outline-none focus:outline-none p-0 border-0 focus:ring-0"
-              placeholder="$ Price"
-            />
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 items-center">
-            <input
-              type="number"
-              class=" w-full bg-transparent outline-none focus:outline-none p-0 border-0 focus:ring-0"
-              placeholder="Quantity"
-            />
-            <div class="pl-2 pr-4 flex items-center justify-end space-x-2">
-              <x-icon.trash class="w-6 h-6 text-red-300 hover:text-red-500 cursor-pointer"/>
-              <x-icon.drag-move class="w-6 h-6 text-gray-400 hover:text-gray-500 cursor-move"/>
-            </div>
-          </div>
+          @endforeach
         </div>
 
         <button
-          class="w-full flex items-center justify-center h-16 bg-gray-400 bg-opacity-50 hover:bg-opacity-75 text-gray-700 hover:text-gray-900 transition duration-100"
+          wire:click="addVariation"
+          type="button"
+          class="w-full focus:ring-0 outline-none focus:outline-none flex items-center justify-center h-16 bg-gray-400 bg-opacity-50 hover:bg-opacity-75 text-gray-700 hover:text-gray-900 transition duration-100"
         >
           <x-icon.plus class="w-6 h-6"/>
           <span>Add Variation</span>
