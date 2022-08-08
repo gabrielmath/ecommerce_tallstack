@@ -21,7 +21,9 @@ class ProductForm extends Component
 
     public $variations = [];
 
-    protected $listeners = ['removeVariation'];
+    public $shippings = [];
+
+    protected $listeners = ['removeVariation', 'removeShipping'];
 
     protected $rules = [
         'product.name'        => 'required',
@@ -41,11 +43,24 @@ class ProductForm extends Component
             'quantity' => null,
             'position' => $index - 1
         ]);
+
+        $this->shippings = collect()->times(3)->map(fn($index) => [
+            'id'               => \Str::random(),
+            'name'             => 'Name ' . $index,
+            'standalone_price' => 1000,
+            'withothers_price' => 700,
+            'position'         => $index - 1
+        ]);
     }
 
     public function removeVariation($id)
     {
         $this->variations = collect($this->variations)->filter(fn($variation) => $variation['id'] !== $id)->toArray();
+    }
+
+    public function removeShipping($id)
+    {
+        $this->shippings = collect($this->shippings)->filter(fn($shipping) => $shipping['id'] !== $id)->toArray();
     }
 
     public function updatingTemporaryImages()
@@ -82,6 +97,20 @@ class ProductForm extends Component
         $this->variations = $newVariations;
     }
 
+    public function updateShippingsPositions($shippingIds)
+    {
+        $newShippings = [];
+
+        foreach ($shippingIds as $index => $id) {
+            $shipping = collect($this->shippings)->where('id', $id)->first();
+
+            $shipping['position'] = $index;
+            $newShippings[] = $shipping;
+        }
+
+        $this->shippings = $newShippings;
+    }
+
     public function addVariation()
     {
         $this->variations[] = [
@@ -91,6 +120,16 @@ class ProductForm extends Component
             'price'    => null,
             'quantity' => null,
             'position' => 0
+        ];
+    }
+
+    public function addShipping()
+    {
+        $this->shippings[] = [
+            'id'               => \Str::random(),
+            'name'             => 'Correios',
+            'standalone_price' => 1000,
+            'withothers_price' => 800
         ];
     }
 

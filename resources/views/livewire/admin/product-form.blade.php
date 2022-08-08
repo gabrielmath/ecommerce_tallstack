@@ -133,38 +133,29 @@
       </div>
       <div class="rounded-lg overflow-hidden mt-3">
         {{-- Row --}}
-        <div class="grid grid-cols-4 bg-white">
-          <div class="col-span-2 flex items-center py-5 px-6">
-            <input
-              type="text"
-              class="bg-transparent outline-none focus:outline-none p-0 border-0 focus:ring-0"
-              placeholder="Name. e.g. Fedex"
+        <div
+          x-data
+          x-init="Sortablejs.create($el, {
+            animation:150,
+            handle: '.cursor-move',
+            onSort({to}) {
+              const shippingIds = Array.from(to.children).map(el => el.getAttribute('shipping-id'));
+              @this.updateShippingsPositions(shippingIds);
+            }
+          })"
+        >
+          @foreach($shippings as $shipping)
+            <livewire:products.shipping-form
+              :shipping="$shipping"
+              key="shipping-form-{{ $shipping['id'] }}"
             />
-          </div>
-
-          <div class="flex items-center pr-6">
-            <input
-              type="text"
-              class="bg-transparent outline-none focus:outline-none p-0 border-0 focus:ring-0"
-              placeholder="$ Price"
-            />
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 items-center">
-            <input
-              type="text"
-              class=" w-full bg-transparent outline-none focus:outline-none p-0 border-0 focus:ring-0"
-              placeholder="$ Price"
-            />
-            <div class="pl-2 pr-4 flex items-center justify-end space-x-2">
-              <x-icon.trash class="w-6 h-6 text-red-300 hover:text-red-500 cursor-pointer"/>
-              <x-icon.drag-move class="w-6 h-6 text-gray-400 hover:text-gray-500 cursor-move"/>
-            </div>
-          </div>
+          @endforeach
         </div>
 
         <button
-          class="w-full flex items-center justify-center h-16 bg-gray-400 bg-opacity-50 hover:bg-opacity-75 text-gray-700 hover:text-gray-900 transition duration-100"
+          wire:click="addShipping"
+          type="button"
+          class="w-full focus:ring-0 outline-none focus:outline-none flex items-center justify-center h-16 bg-gray-400 bg-opacity-50 hover:bg-opacity-75 text-gray-700 hover:text-gray-900 transition duration-100"
         >
           <x-icon.plus class="w-6 h-6"/>
           <span>Add Shipping</span>
