@@ -26,14 +26,19 @@ class ProductForm extends Component
     protected $listeners = ['removeVariation', 'removeShipping'];
 
     protected $rules = [
-        'product.name'        => 'required',
-        'product.description' => ['required', 'email', 'min:5'],
-        'product.price'       => 'required'
+        'product.name'        => ['required', 'max:255'],
+        'product.description' => ['required', 'max:4096'],
+        'product.price'       => ['required', 'integer', 'min:100', 'max:1000000000']
+    ];
+
+    protected $messages = [
+        'product.price.min' => 'The price must be at least $ 1.00',
+        'product.price.max' => 'The price may not be greater than $ 1,000,000.00',
     ];
 
     public function mount()
     {
-        $this->product = new Product();
+        $this->product ??= new Product();
 
         $this->variations = collect()->times(3)->map(fn($index) => [
             'id'       => \Str::random(),
@@ -136,7 +141,13 @@ class ProductForm extends Component
     public function save()
     {
         $this->validate();
-//        dd('save');
+        $this->product->save();
+
+        if ($this->product->wasRecentlyCreated) {
+            return redirect()->to(route('admin.products.edit', $this->product));
+        }
+
+        return redirect()->route('admin.products');
     }
 
     public function render()

@@ -1,4 +1,4 @@
-<div class="rounded-2xl space-y-4 bg-white shadow-md p-5">
+<a href="{{ route('admin.products.edit', $product) }}" class="rounded-2xl space-y-4 bg-white shadow-md p-5">
   <div class="flex justify-between">
     <h3 class="font-bold text-gray-700 truncate">{{ $product->name }}</h3>
     <span class="text-gray-400 whitespace-nowrap">$ {{ $product->price / 100 }}</span>
@@ -15,4 +15,4 @@
   <p class="text-sm text-gray-500 line-clamp-3">
     {{ $product->description }}
   </p>
-</div>
+</a>

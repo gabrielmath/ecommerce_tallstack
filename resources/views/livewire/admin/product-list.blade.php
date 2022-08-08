@@ -32,7 +32,7 @@
 
   <div class="grid grid-cols-3 gap-5 mt-6">
     @forelse($this->products as $product)
-      <x-product.card :product="$product"/>
+      <x-product.card :product="$product" :key="$product->id"/>
     @empty
     @endforelse
   </div>

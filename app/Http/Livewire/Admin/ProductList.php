@@ -46,6 +46,7 @@ class ProductList extends Component
                     ? $query->whereNull('published_at')
                     : $query->whereNotNull('published_at');
             })
+            ->latest()
             ->paginate(9);
     }
 }
