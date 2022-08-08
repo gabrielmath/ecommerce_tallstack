@@ -1,7 +1,8 @@
 @props(['padding' => 'p-0'])
 
 <div
-  x-data="basePrice()"
+  x-data="basePrice(@entangle($attributes->wire('model')))"
+  {{-- @entangle = "Amarração" do blade com o Livewire a partir do alpine --}}
   x-init="mounted()"
 >
   <input
@@ -18,9 +19,9 @@
 </div>
 
 <script>
-  function basePrice() {
+  function basePrice(integerValue) {
     return {
-      integerValue: @entangle($attributes->wire('model')), // "Amarração" do blade com o Livewire a partir do alpine
+      integerValue,
       maskedValue: null,
       prefix: '$ ',
 
