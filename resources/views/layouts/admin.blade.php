@@ -21,8 +21,8 @@
   @stack('scripts')
 </head>
 <body class="font-sans antialiased">
-
-<div class="min-h-screen bg-slate-200">
+@livewire('livewire-toast')
+<div class="min-h-screen bg-slate-200 relative">
   <!-- Page Heading -->
   <x-admin.nav-bar/>
 
@@ -31,7 +31,6 @@
     {{ $slot }}
   </main>
 </div>
-
 @stack('modals')
 
 @livewireScripts

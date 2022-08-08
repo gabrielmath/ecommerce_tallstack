@@ -144,10 +144,14 @@ class ProductForm extends Component
         $this->product->save();
 
         if ($this->product->wasRecentlyCreated) {
-            return redirect()->to(route('admin.products.edit', $this->product));
+            return redirect()
+                ->route('admin.products.edit', $this->product)
+                ->with('livewire-toast', ['type' => 'success', 'message' => 'Created Successfully!']);
         }
 
-        return redirect()->route('admin.products');
+        return redirect()
+            ->route('admin.products')
+            ->with('livewire-toast', ['type' => 'success', 'message' => 'Updated Successfully!']);;
     }
 
     public function render()
